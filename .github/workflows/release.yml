@@ -3,6 +3,7 @@ name: Release
 permissions:
   contents: write
   pull-requests: write
+  labels: write
 
 on:
   push:
