@@ -1,0 +1,13 @@
+external_torques_broadcaster:
+  arm_id:
+    type: string
+    default_value: "fr3"
+    description: "Arm id name."
+  use_fake_hardware:
+    type: bool
+    default_value: false
+    description: "Whether to use fake hardware"
+  joints:
+    type: string_array
+    default_value: []
+    description: "Names of the joints"

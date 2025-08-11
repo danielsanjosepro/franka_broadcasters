@@ -1,0 +1,14 @@
+<library path="franka_broadcasters">
+    <class name="franka_broadcasters/ExternalTorquesBroadcaster"
+           type="franka_broadcasters::ExternalTorquesBroadcaster" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            publish the external torques applied to the robot.
+        </description>
+    </class>
+    <class name="franka_broadcasters/ExternalWrenchBroadcaster"
+           type="franka_broadcasters::ExternalWrenchBroadcaster" base_class_type="controller_interface::ControllerInterface">
+        <description>
+            publish the external wrench applied to the robot.
+        </description>
+    </class>
+</library>

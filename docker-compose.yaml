@@ -1,0 +1,56 @@
+services:
+  franka_broadcasters_base:
+    build:
+      context: .
+      target: base
+      args:
+        ROS_DISTRO: humble
+    container_name: franka_broadcasters_base_container
+
+    # === Tune this to your application ===
+    network_mode: "host"
+    ipc: "host"
+    pid: "host"
+    privileged: true
+    # ===
+
+    command: /bin/bash
+    tty: true
+    stdin_open: true
+
+    volumes:
+      - $HOME/.Xauthority:/root/.Xauthority 
+      - /tmp/.X11-unix:/tmp/.X11-unix:rw 
+      - /dev:/dev
+
+    environment:
+      QT_X11_NO_MITSHM: 1
+      DISPLAY: $DISPLAY
+      ROS_DOMAIN_ID: 100
+      RCUTILS_COLORIZED_OUTPUT: 1
+      SHELL: /bin/bash
+
+    cap_add:
+      - SYS_NICE
+
+    ulimits:
+      rtprio: 99
+      rttime: -1
+      memlock: 8428281856
+
+  franka_broadcasters_overlay:
+    extends: franka_broadcasters_base
+    build:
+      context: .
+      target: overlay
+    container_name: franka_broadcasters_overlay_container
+
+  franka_broadcasters_talker_example:
+    extends: franka_broadcasters_overlay
+    container_name: franka_broadcasters_talker_container
+    command: >
+      bash -c "
+      source /opt/ros/$$ROS_DISTRO/setup.bash &&
+      source install/setup.bash &&
+      ros2 run demo_nodes_cpp talker"
+

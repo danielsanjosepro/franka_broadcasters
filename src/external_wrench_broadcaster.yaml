@@ -1,0 +1,19 @@
+external_wrench_broadcaster:
+  arm_id:
+    type: string
+    default_value: "fr3"
+    description: "Arm id name."
+  use_fake_hardware:
+    type: bool
+    default_value: false
+    description: "Whether to use fake hardware"
+  frame_id:
+    type: string
+    default_value: "fr3_hand_tcp"
+    description: "Frame id for the wrench message"
+  filter_alpha:
+    type: double
+    default_value: 0.1
+    description: "Exponential moving average filter alpha parameter (0.0-1.0, higher values = less filtering)"
+    validation:
+      bounds<>: [0.0, 1.0]
