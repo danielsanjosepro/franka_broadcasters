@@ -80,18 +80,18 @@ RUN git clone https://github.com/danielsanjosepro/franka_ros2.git src/franka_ros
     && touch src/franka_ros2/COLCON_IGNORE src/libfranka/COLCON_IGNORE src/franka_description/COLCON_IGNORE
 
 
-FROM osrf/ros:${ROS_DISTRO}-desktop AS overlay
+FROM base AS overlay
 
 COPY --chown=ros:ros . /home/ros/ros2_ws/src
 
 WORKDIR /home/ros/ros2_ws
 
-RUN bash /opt/ros/${ROS_DISTRO}/setup.bash \
-    && bash /home/ros/ros2_ws/install/setup.bash \
+RUN source /opt/ros/${ROS_DISTRO}/setup.bash \
+    && source /home/ros/ros2_ws/install/setup.bash \
     && sudo apt update -y \
     && rosdep update \
     && rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} \
-    && colcon build
+    && colcon build --symlink-install --cmake-args -DCMAKE_BUILD_TYPE=Release
 
 # RUN source /opt/ros/${ROS_DISTRO}/setup.bash && \
 #     rosdep install -y --from-paths src --ignore-src --rosdistro ${ROS_DISTRO} && \

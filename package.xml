@@ -13,9 +13,9 @@
   <depend>controller_interface</depend>
   <depend>pluginlib</depend>
   <depend>rclcpp_lifecycle</depend>
-  <depend>franka_msgs</depend>
-  <depend>franka_semantic_components</depend>
-  <depend>franka_example_controllers</depend>
+  <!-- <depend>franka_msgs</depend> -->
+  <!-- <depend>franka_semantic_components</depend> -->
+  <!-- <depend>franka_example_controllers</depend> -->
   <depend>generate_parameter_library</depend>
   <depend>geometry_msgs</depend>
 
